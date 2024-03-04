@@ -9,46 +9,181 @@ let y = '';
 let x = '';
 let leng;
 let isClicked = false;
+let first;
+let firstFinished = false;
+let second;
+let isEqualClicked = false;
+let result;
+let sign;
+let stick = false;
+
 
 
 clear.addEventListener('click', () => {
     selectedNum.textContent = "0";
     sub.textContent = "";
     y = '';
+    first = undefined;
+    second = undefined;
+    stick = false;
+    sign = "";
+    result = 0;
+    isEqualClicked = false;
+    leng = 0;
     x = '';
     isClicked = false;
 });
 
 del.addEventListener('click', () => {
-    let s = leng - 1;
-    let x =  selectedNum.textContent.slice(0, s);
-    selectedNum.textContent = x;
-    y = selectedNum.textContent;
-    leng = x.length;
-    console.log(x)
+    if(stick) {
+        return;
+    } else {
+        let s = leng - 1;
+        let x =  selectedNum.textContent.slice(0, s);
+        selectedNum.textContent = x;
+        y = selectedNum.textContent;
+        first = parseFloat(y);
+        leng = x.length;
+        console.log(x)
+    }
+    
 });
 
 
 
 calcBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
-        if(btn.textContent != "x" && btn.textContent != "+" && btn.textContent != "-" && btn.textContent != "÷"){
+
+        if(btn.textContent != "x" && btn.textContent != "+" && btn.textContent != "-" && btn.textContent != "÷" && btn.textContent != "=" ){
             if(isClicked){
-                y = '';
-                isClicked = false
+                
+                if(firstFinished){
+                    y = '';
+                    firstFinished = false;
+                }
+                if(stick){
+                    return;
+                } else {
+                    y += btn.textContent;
+                    console.log(second);
+                    second = parseFloat(y);
+                    console.log(second);
+                    selectedNum.textContent = y;
+                    leng = selectedNum.textContent.length;
+                    stick = false;
+                }
+                
+            } else {
+                y += btn.textContent;
+                first = parseFloat(y);
+                firstFinished = true;
+                selectedNum.textContent = y;
+                leng = selectedNum.textContent.length;
             }
-            y += btn.textContent;
-            selectedNum.textContent = y;
-            leng = selectedNum.textContent.length;
+           
             
+        }
+        if(btn.textContent == "="){
+            if(second == undefined || first == undefined || first == 0 || second == 0) return;
+            
+            if(stick) return;
+
+
+            if(sign == "x" && !isEqualClicked){
+                selectedNum.textContent = first * second;
+                sub.textContent = first + " x " + second + " =";
+                result = first * second;
+                stick = true;
+            }
+
+            if(sign == "x" && isEqualClicked){
+                selectedNum.textContent = result * second;
+                sub.textContent = result + " x " + second + " =";
+                result = result * second;
+                stick = true;
+            }
+
+
+            if(sign == "+" && !isEqualClicked){
+                selectedNum.textContent = first + second;
+                sub.textContent = first + " + " + second + " =";
+                result = first + second;
+                stick = true;
+            }
+
+            if(sign == "+" && isEqualClicked){
+                console.log(second);
+                selectedNum.textContent = result + second;
+                sub.textContent = result + " + " + second + " =";
+                result = result + second;
+                stick = true;
+            }
+
+            if(sign == "÷" && !isEqualClicked){
+                selectedNum.textContent = first / second;
+                sub.textContent = first + " ÷ " + second + " =";
+                result = first / second;
+                stick = true;
+            }
+
+            if(sign == "÷" && isEqualClicked){
+                selectedNum.textContent = result / second;
+                sub.textContent = result + " ÷ " + second + " =";
+               result = result / second;
+               stick = true;
+            }
+
+            if(sign == "-" && !isEqualClicked){
+                console.log(second);
+                selectedNum.textContent = first - second;
+                sub.textContent = first + " - " + second + " =";
+                result = first - second;
+                stick = true;
+            }
+
+            if(sign == "-" && isEqualClicked){
+                console.log(second);
+                selectedNum.textContent = result - second;
+                sub.textContent = result + " - " + second + " =";
+               result = result - second;
+               stick = true;
+            }
+            
+        
+
+            isEqualClicked = true;
+
         }
 
         if(btn.textContent == "x" || btn.textContent == "+" || btn.textContent == "-" || btn.textContent === "÷"){
+            console.log(first);
+            if(first == undefined) return;
             isClicked = true;
-            x += y + ' ' + btn.textContent;
-            sub.textContent = x;
+            sign = btn.textContent;
+
+            
+            if(isEqualClicked){
+                x = result + " " + btn.textContent;
+                sub.textContent = x;
+                x = '';
+                stick = false;
+            } else {
+                x += y + ' ' + btn.textContent;
+                sub.textContent = x;
+                x = '';
+            }
+
+           if(firstFinished){
+                y = y;
+                
+           } else {
+                y = '';
+           }
+            
         }
     });
 
 
 })
+
+
