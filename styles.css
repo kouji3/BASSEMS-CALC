@@ -70,7 +70,7 @@ body, html {
     word-wrap: break-word;
     
     font-size: 19px;
-  
+    color: rgb(199, 198, 198);
     letter-spacing: 1.2px;
     align-self: flex-end;
     
@@ -111,6 +111,7 @@ body, html {
 
 .btns > * {
     font-size: 28px;
+    touch-action: manipulation;
     cursor: pointer;
     color: white;
     border: 1px solid gray;
@@ -138,3 +139,9 @@ body, html {
         width: 95%;
     }
 }
+
+@media (hover: none) {
+    .btns > *:hover {
+        background-color: rgba(255, 255, 255, 0.137);
+    }
+  }

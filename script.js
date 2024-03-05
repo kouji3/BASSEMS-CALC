@@ -18,6 +18,13 @@ let sign;
 let stick = false;
 
 
+document.body.ontouchstart = function() {
+    // Remove the hover state from all elements
+    for (let element of document.querySelectorAll(':hover')) {
+      element.classList.remove('hover');
+    }
+};
+
 
 clear.addEventListener('click', () => {
     selectedNum.textContent = "0";
@@ -25,7 +32,7 @@ clear.addEventListener('click', () => {
     y = '';
     first = undefined;
     second = undefined;
-    stick = false;
+    stick = false;  
     sign = "";
     result = 0;
     isEqualClicked = false;
@@ -38,13 +45,24 @@ del.addEventListener('click', () => {
     if(stick) {
         return;
     } else {
-        let s = leng - 1;
-        let x =  selectedNum.textContent.slice(0, s);
-        selectedNum.textContent = x;
-        y = selectedNum.textContent;
-        first = parseFloat(y);
-        leng = x.length;
-        console.log(x)
+        if(isClicked) {
+            let s = leng - 1;
+            let x =  selectedNum.textContent.slice(0, s);
+            selectedNum.textContent = x;
+            y = selectedNum.textContent;
+            second = parseFloat(y);
+            leng = x.length;
+            console.log(x)
+        } else {
+            let s = leng - 1;
+            let x =  selectedNum.textContent.slice(0, s);
+            selectedNum.textContent = x;
+            y = selectedNum.textContent;
+            first = parseFloat(y);
+            leng = x.length;
+            console.log(x)
+        }
+        
     }
     
 });
@@ -55,36 +73,52 @@ calcBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
 
         if(btn.textContent != "x" && btn.textContent != "+" && btn.textContent != "-" && btn.textContent != "÷" && btn.textContent != "=" ){
+            if(btn.textContent == "." && y.includes(".")) return;
             if(isClicked){
                 
                 if(firstFinished){
                     y = '';
                     firstFinished = false;
                 }
-                if(stick){
-                    return;
-                } else {
-                    y += btn.textContent;
-                    console.log(second);
-                    second = parseFloat(y);
-                    console.log(second);
+                if(y == '' && btn.textContent == "."){
+                    y = '0.';
                     selectedNum.textContent = y;
-                    leng = selectedNum.textContent.length;
-                    stick = false;
+                } else {
+                    if(stick){
+                        return;
+                    } else {
+                        y += btn.textContent;
+                        console.log(second);
+                        second = parseFloat(y);
+                        console.log(second);
+                        selectedNum.textContent = y;
+                        leng = selectedNum.textContent.length;
+                        stick = false;
+                    }
                 }
                 
+                
             } else {
-                y += btn.textContent;
-                first = parseFloat(y);
-                firstFinished = true;
-                selectedNum.textContent = y;
-                leng = selectedNum.textContent.length;
+
+                if(btn.textContent == "." && y.includes(".")) return;
+
+                if(y == '' && btn.textContent == "."){
+                    y = '0.';
+                    selectedNum.textContent = y;
+                } else {
+                    y += btn.textContent;
+                    first = parseFloat(y);
+                    firstFinished = true;
+                    selectedNum.textContent = y;
+                    leng = selectedNum.textContent.length;
+                }
+                
             }
            
             
         }
         if(btn.textContent == "="){
-            if(second == undefined || first == undefined || first == 0 || second == 0) return;
+            if(first == undefined || second == undefined) return;
             
             if(stick) return;
 
