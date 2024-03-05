@@ -124,63 +124,129 @@ calcBtns.forEach((btn) => {
 
 
             if(sign == "x" && !isEqualClicked){
-                selectedNum.textContent = first * second;
-                sub.textContent = first + " x " + second + " =";
-                result = first * second;
-                stick = true;
+                let check = String(first * second);
+                if(check.includes(".")){
+                    selectedNum.textContent = (first * second).toFixed(2);
+                    sub.textContent = first + " x " + second + " =";
+                    result = (first * second).toFixed(2);
+                    stick = true;
+                } else {
+                    selectedNum.textContent = first * second;
+                    sub.textContent = first + " x " + second + " =";
+                    result = first * second;
+                    stick = true;
+                }
+                
             }
 
             if(sign == "x" && isEqualClicked){
-                selectedNum.textContent = result * second;
-                sub.textContent = result + " x " + second + " =";
-                result = result * second;
-                stick = true;
+                let check = String(first * second);
+                if(check.includes(".")){
+                    selectedNum.textContent = (result * second).toFixed(2);
+                    sub.textContent = result + " x " + second + " =";
+                    result = (result * second).toFixed(2);
+                    stick = true;
+                }  else {
+                    selectedNum.textContent = result * second;
+                    sub.textContent = result + " x " + second + " =";
+                    result = result * second;
+                    stick = true;
+                }
+                
             }
 
 
             if(sign == "+" && !isEqualClicked){
-                selectedNum.textContent = first + second;
-                sub.textContent = first + " + " + second + " =";
-                result = first + second;
-                stick = true;
+                let check = String(first + second);
+                if(check.includes(".")){
+                    selectedNum.textContent = (first + second).toFixed(2);
+                    sub.textContent = first + " + " + second + " =";
+                    result = (first + second).toFixed(2);
+                    stick = true;
+                } else {
+                    selectedNum.textContent = first + second;
+                    sub.textContent = first + " + " + second + " =";
+                    result = first + second;
+                    stick = true;
+                }
             }
 
             if(sign == "+" && isEqualClicked){
                 console.log(second);
-                selectedNum.textContent = result + second;
-                sub.textContent = result + " + " + second + " =";
-                result = result + second;
-                stick = true;
+                let check = String(first + second);
+                if(check.includes(".")){
+                    selectedNum.textContent = (first + second).toFixed(2);
+                    sub.textContent = first + " + " + second + " =";
+                    result = (first + second).toFixed(2);
+                    stick = true;
+                } else {
+                    selectedNum.textContent = first + second;
+                    sub.textContent = first + " + " + second + " =";
+                    result = first + second;
+                    stick = true;
+                }
             }
 
             if(sign == "÷" && !isEqualClicked){
-                selectedNum.textContent = first / second;
-                sub.textContent = first + " ÷ " + second + " =";
-                result = first / second;
-                stick = true;
+                let check = String(first / second);
+                if(check.includes(".")){
+                    selectedNum.textContent = (first / second).toFixed(2);
+                    sub.textContent = first + " ÷ " + second + " =";
+                    result = (first / second).toFixed(2);
+                    stick = true;
+                } else {
+                    selectedNum.textContent = first / second;
+                    sub.textContent = first + " ÷ " + second + " =";
+                    result = first / second;
+                    stick = true;
+                }
             }
 
             if(sign == "÷" && isEqualClicked){
-                selectedNum.textContent = result / second;
-                sub.textContent = result + " ÷ " + second + " =";
-               result = result / second;
-               stick = true;
+                let check = String(first / second);
+                if(check.includes(".")){
+                    selectedNum.textContent = (first / second).toFixed(2);
+                    sub.textContent = first + " ÷ " + second + " =";
+                    result = (first / second).toFixed(2);
+                    stick = true;
+                } else {
+                    selectedNum.textContent = first / second;
+                    sub.textContent = first + " ÷ " + second + " =";
+                    result = first / second;
+                    stick = true;
+                }
             }
 
             if(sign == "-" && !isEqualClicked){
                 console.log(second);
-                selectedNum.textContent = first - second;
-                sub.textContent = first + " - " + second + " =";
-                result = first - second;
-                stick = true;
+                let check = String(first - second);
+                if(check.includes(".")){
+                    selectedNum.textContent = (first - second).toFixed(2);
+                    sub.textContent = first + " - " + second + " =";
+                    result = (first - second).toFixed(2);
+                    stick = true;
+                } else {
+                    selectedNum.textContent = first - second;
+                    sub.textContent = first + " - " + second + " =";
+                    result = first - second;
+                    stick = true;
+                }
             }
 
             if(sign == "-" && isEqualClicked){
                 console.log(second);
-                selectedNum.textContent = result - second;
-                sub.textContent = result + " - " + second + " =";
-               result = result - second;
-               stick = true;
+                let check = String(first - second);
+                if(check.includes(".")){
+                    selectedNum.textContent = (first - second).toFixed(2);
+                    sub.textContent = first + " - " + second + " =";
+                    result = (first - second).toFixed(2);
+                    stick = true;
+                } else {
+                    selectedNum.textContent = first - second;
+                    sub.textContent = first + " - " + second + " =";
+                    result = first - second;
+                    stick = true;
+                }
             }
             
         
