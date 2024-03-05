@@ -117,6 +117,8 @@ calcBtns.forEach((btn) => {
            
             
         }
+
+
         if(btn.textContent == "="){
             if(first == undefined || second == undefined) return;
             
@@ -140,7 +142,7 @@ calcBtns.forEach((btn) => {
             }
 
             if(sign == "x" && isEqualClicked){
-                let check = String(first * second);
+                let check = String(result * second);
                 if(check.includes(".")){
                     selectedNum.textContent = (result * second).toFixed(2);
                     sub.textContent = result + " x " + second + " =";
@@ -173,16 +175,16 @@ calcBtns.forEach((btn) => {
 
             if(sign == "+" && isEqualClicked){
                 console.log(second);
-                let check = String(first + second);
+                let check = String(result + second);
                 if(check.includes(".")){
-                    selectedNum.textContent = (first + second).toFixed(2);
-                    sub.textContent = first + " + " + second + " =";
-                    result = (first + second).toFixed(2);
+                    selectedNum.textContent = (result + second).toFixed(2);
+                    sub.textContent = result + " + " + second + " =";
+                    result = (result + second).toFixed(2);
                     stick = true;
                 } else {
-                    selectedNum.textContent = first + second;
-                    sub.textContent = first + " + " + second + " =";
-                    result = first + second;
+                    selectedNum.textContent = result + second;
+                    sub.textContent = result + " + " + second + " =";
+                    result = result + second;
                     stick = true;
                 }
             }
@@ -203,16 +205,16 @@ calcBtns.forEach((btn) => {
             }
 
             if(sign == "÷" && isEqualClicked){
-                let check = String(first / second);
+                let check = String(result / second);
                 if(check.includes(".")){
-                    selectedNum.textContent = (first / second).toFixed(2);
-                    sub.textContent = first + " ÷ " + second + " =";
-                    result = (first / second).toFixed(2);
+                    selectedNum.textContent = (result / second).toFixed(2);
+                    sub.textContent = result + " ÷ " + second + " =";
+                    result = (result / second).toFixed(2);
                     stick = true;
                 } else {
-                    selectedNum.textContent = first / second;
-                    sub.textContent = first + " ÷ " + second + " =";
-                    result = first / second;
+                    selectedNum.textContent = result / second;
+                    sub.textContent = result + " ÷ " + second + " =";
+                    result = result / second;
                     stick = true;
                 }
             }
@@ -235,16 +237,16 @@ calcBtns.forEach((btn) => {
 
             if(sign == "-" && isEqualClicked){
                 console.log(second);
-                let check = String(first - second);
+                let check = String(result - second);
                 if(check.includes(".")){
-                    selectedNum.textContent = (first - second).toFixed(2);
-                    sub.textContent = first + " - " + second + " =";
-                    result = (first - second).toFixed(2);
+                    selectedNum.textContent = (result - second).toFixed(2);
+                    sub.textContent = result + " - " + second + " =";
+                    result = (result - second).toFixed(2);
                     stick = true;
                 } else {
-                    selectedNum.textContent = first - second;
-                    sub.textContent = first + " - " + second + " =";
-                    result = first - second;
+                    selectedNum.textContent = result - second;
+                    sub.textContent = result + " - " + second + " =";
+                    result = result - second;
                     stick = true;
                 }
             }
