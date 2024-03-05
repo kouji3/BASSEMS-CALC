@@ -16,6 +16,7 @@ let isEqualClicked = false;
 let result;
 let sign;
 let stick = false;
+let willContinue = undefined;
 
 
 document.body.ontouchstart = function() {
@@ -34,8 +35,9 @@ clear.addEventListener('click', () => {
     second = undefined;
     stick = false;  
     sign = "";
+    willContinue = undefined;
     result = 0;
-    isEqualClicked = false;
+    isEqualClicked  = undefined;
     leng = 0;
     x = '';
     isClicked = false;
@@ -83,17 +85,21 @@ calcBtns.forEach((btn) => {
                 if(y == '' && btn.textContent == "."){
                     y = '0.';
                     selectedNum.textContent = y;
+                   
                 } else {
                     if(stick){
                         return;
                     } else {
+                       
                         y += btn.textContent;
                         console.log(second);
                         second = parseFloat(y);
+                        willContinue = false;
                         console.log(second);
                         selectedNum.textContent = y;
                         leng = selectedNum.textContent.length;
                         stick = false;
+                        willContinue = true;
                     }
                 }
                 
@@ -177,9 +183,11 @@ calcBtns.forEach((btn) => {
                 console.log(second);
                 let check = String(result + second);
                 if(check.includes(".")){
-                    selectedNum.textContent = (result + second).toFixed(2);
+                    let k = parseFloat(result) + parseFloat(second);
+                    selectedNum.textContent = k.toFixed(2);
                     sub.textContent = result + " + " + second + " =";
-                    result = (result + second).toFixed(2);
+                    
+                    result = k.toFixed(2);
                     stick = true;
                 } else {
                     selectedNum.textContent = result + second;
@@ -260,19 +268,26 @@ calcBtns.forEach((btn) => {
         if(btn.textContent == "x" || btn.textContent == "+" || btn.textContent == "-" || btn.textContent === "÷"){
             console.log(first);
             if(first == undefined) return;
+            
             isClicked = true;
             sign = btn.textContent;
 
             
+
+            
+
             if(isEqualClicked){
                 x = result + " " + btn.textContent;
                 sub.textContent = x;
                 x = '';
                 stick = false;
             } else {
-                x += y + ' ' + btn.textContent;
-                sub.textContent = x;
-                x = '';
+                if(!willContinue){
+                    x += y + ' ' + btn.textContent;
+                    sub.textContent = x;
+                    x = '';
+                } else return;
+                
             }
 
            if(firstFinished){
